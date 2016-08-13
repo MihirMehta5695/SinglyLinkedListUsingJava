@@ -78,10 +78,64 @@ public class SinglyLinkedList
 	
 	void insertAfter(int key,int value)
 	{
-		if(isListExisting&&!isListEmpty)
+		if(isListExisting)
 		{
-			p=head.next;//assigning the value of first node to variable 'p'
 			
+			p=head.next;//assigning the value of first node to variable 'p'
+			while(true)
+			{
+				
+				if(p.data==key)
+				{
+					
+					temp=new Node(value);
+					temp.next=p.next;
+					p.next=temp;
+					return;
+					
+				}//end of if stmt
+				
+				else
+				{
+					if(p.next!=null)
+					{
+						
+						p=p.next;
+						continue;
+					}//end of if stmt
+					
+					if(p.data==key)
+					{
+						
+						temp=new Node(value);
+						temp.next=p.next;
+						p.next=temp;
+						return;
+						
+					}//end of if stmt
+					
+					if(!isListEmpty)
+					{
+						
+						System.out.println("Error: there exists no value so inserting the node at the end of the list! ");
+						insertAtEnd(value);
+						return;
+						
+					}//end of else stmt
+					
+					
+				}//end of else stmt
+				
+			}//end of while stmt
+			
+		}//end of if stmt
+		
+		else
+		{
+			
+			System.out.println("Error: The List does not exists!!!!");
+			
+		}//end of else stmt
 		
 		
 	}//end of insertAfter(..)
@@ -92,7 +146,7 @@ public class SinglyLinkedList
 		if(isListExisting&&!isListEmpty)
 		{
 			p=head.next;
-			
+			System.out.println("\n\n\nThe List is as : ");
 			while(p.next!=null)
 			{
 				
@@ -166,9 +220,9 @@ public class SinglyLinkedList
 		if(isListExisting&&!isListEmpty)
 		{
 			
-			temp=head.next;//the node to be deleted is represented by temp;
-			head.next=temp.next;
-			temp=null;//deleting the node
+			p=head.next;//the node to be deleted is represented by temp;
+			head.next=p.next;
+			p=null;//deleting the node
 			return;
 			
 		}//end of if stmt
@@ -208,21 +262,58 @@ public class SinglyLinkedList
 		
 	}//end of deleteAtEnd() method
 
-	void deleteAfter(int key)
+	void deleteValue(int key)
 	{
 		
 		if(isListExisting&&!isListEmpty)
 		{
 			
 			p=head.next;//assigning the value of first node to variable 'p'
-			while(p.data!=key)
+			if(p.data==key)
 			{
-				if(p.next!=null)
+				deleteAtBegin();
+				return;
+			}//end of if stmt
+			
+			while(true)
+			{
+				if(p.data==key)
+				{
+					temp.next=p.next;
+					p=null;
+					return;
+				}//end of if stmt
+				
+				else
 				{
 					
+					if(p.next!=null)
+					{
+						temp=p;//making temp hold value of p;
+						p=p.next;
+						continue;
+					}//end of if stmt
+					
+					if(p.next==null)
+					{
+						if(p.data==key)
+						{
+							temp.next=p.next;
+							p=null;
+							return;
+						}//end of if stmt
+						
+						else
+						{
+							System.out.println("Error : no such node with given value exists");
+							return;
+						}//end of else stmt
+						
+					}//end of if stmt
 					
 					
-				}//end of if stmt
+												
+				}//end of else statement
 				
 			}//end of while loop
 			
@@ -237,7 +328,13 @@ public class SinglyLinkedList
 		
 		
 	}//end of deleteAfter(.) method
-	
-	
 
+	void vanishList()
+	{
+
+		head=null;
+		isListEmpty=true;
+		isListExisting=false;
+	}
+	
 }//end of SinglyLinkedList class{}
