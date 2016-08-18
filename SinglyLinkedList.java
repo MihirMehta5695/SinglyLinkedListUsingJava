@@ -242,6 +242,15 @@ public class SinglyLinkedList
 		{
 			
 			p=head.next;
+			if(p.next==null)
+			{
+				
+				deleteAtBegin();
+				isListEmpty=true;
+				return;
+				
+			}//end of if stmt
+			
 			while(p.next!=null)
 			{
 				temp=p;
